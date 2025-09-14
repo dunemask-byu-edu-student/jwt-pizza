@@ -7,7 +7,7 @@ A JSON Web Token, or [JWT](https://jwt.io/introduction), (pronounced JOT) is a d
 
 `JWT Pizza` takes the next stage of digital evolution by allowing you to buy pizzas that you can never actually eat. Not only does JWT exchange bitcoin and give you nothing in return, it also allows for you to be come a franchisee and turn the whole vapor company into an MLM.
 
-You can see a working example of the application at [pizza.cs329.click](https://pizza.cs329.click)
+You can use the client (not connected to a backend server) at [https://pizza.dunemask.org](https://pizza.dunemask.org)
 
 ## Running locally
 
@@ -74,7 +74,7 @@ Modify `tailwind.config.js`
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['index.html', './src/**/*.{html,js,jsx}'],
+  content: ["index.html", "./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {},
   },
@@ -112,25 +112,29 @@ npm i preline
 Updated the tailwind config to use preline.
 
 ```js
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ['index.html', './src/**/*.{html,js,jsx}', './node_modules/preline/preline.js'],
+  content: [
+    "index.html",
+    "./src/**/*.{html,js,jsx}",
+    "./node_modules/preline/preline.js",
+  ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
     },
   },
-  plugins: [require('preline/plugin')],
+  plugins: [require("preline/plugin")],
 };
 ```
 
 Import preline into app.jsx.
 
 ```js
-import 'preline/preline';
+import "preline/preline";
 ```
 
 Initialize components whenever the page location changes.
@@ -152,4 +156,5 @@ export default function App() {
 [HeroIcons](https://heroicons.com/) - MIT license
 
 ### Warning
+
 Automatic Deploys are enabled! Use with caution!
