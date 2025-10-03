@@ -83,7 +83,7 @@ jobs:
         working-directory: jwt-pizza-service
 
       - name: Seed DB
-        run: ./generate.sh
+        run: bash ci-generate.sh http://localhost:3000
         working-directory: jwt-pizza-service
 
       - name: Stop Server
