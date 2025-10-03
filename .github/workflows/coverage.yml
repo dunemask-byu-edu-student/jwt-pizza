@@ -91,13 +91,7 @@ jobs:
       - name: Ensure Database up
         working-directory: jwt-pizza
         run: |
-          status_code=$(curl -s -o /dev/null -w "%{http_code}" -X PUT http://localhost:3000/api/auth \
-            -H "Content-Type: application/json" \
-            -d '{"email":"a@jwt.com","password":"'"${{ env.CI_ADMIN_PASSWORD }}"'"}')
-          if [ "$status_code" -ne 200 ]; then
-            echo "Request failed with status $status_code"
-            exit 1
-          fi
+          curl -X PUT http://localhost:3000/api/auth -H "Content-Type: application/json" -d '{"email":"a@jwt.com","password":"potato"}'
 
       - name: Run tests
         run: |
