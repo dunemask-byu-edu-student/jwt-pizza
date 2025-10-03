@@ -32,16 +32,16 @@ test('open & close franchise', async ({ page }) => {
 test('open & close store', async ({ page }) => {
     const {email, password, franchiseName} = await createFranchise(page);
     const storeName = `${franchiseName} - store ${randomSlug()}`;
-    await page.goto(CONFIG.ORIGIN);
+    await page.goto(CONFIG.ORIGIN, {waitUntil: "domcontentloaded"});
     await login(page, email, password);
-    await page.goto(`${CONFIG.ORIGIN}/franchise-dashboard`);
+    await page.goto(`${CONFIG.ORIGIN}/franchise-dashboard`, {waitUntil: "domcontentloaded"});
     await page.getByRole('button', { name: 'Create' }).click();
     await page.getByRole('textbox', { name: 'store name' }).fill(storeName);
     await page.getByRole('button', { name: 'Create' }).click();
     await expect(page.getByText(storeName)).toBeVisible();
     await logout(page);
     await login(page, CONFIG.ADMIN_EMAIL, CONFIG.ADMIN_PASSWORD);
-    await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`);
+    await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`, {waitUntil: "domcontentloaded"});
     await expect(page.getByText(storeName)).toBeVisible();
     await logout(page);
     await closeFranchise(page, franchiseName);

@@ -8,7 +8,7 @@ export async function createNewDinerAndLogin(page: Page){
     const name = `Full name '${slug}'`;
     const email = `pw-${slug}+${Date.now()}@test.com`;
     const password = slug;
-    await page.goto(CONFIG.ORIGIN);
+    await page.goto(CONFIG.ORIGIN, {waitUntil: "domcontentloaded"});
     await page.getByRole('link', { name: 'Login' }).click();
     await page.getByRole('main').getByText('Register').click();
     await page.getByRole('textbox', { name: 'Full name' }).fill(name);
@@ -19,7 +19,7 @@ export async function createNewDinerAndLogin(page: Page){
 }
 
 export async function login(page: Page, email: string, password: string, timeout = CONFIG.TIMEOUTS.sm){
-        await page.goto(CONFIG.ORIGIN);
+        await page.goto(CONFIG.ORIGIN, {waitUntil: "domcontentloaded"});
         await page.waitForTimeout(CONFIG.TIMEOUTS.md);
         await page.getByRole('link', { name: 'Login' }).click();
         await page.getByRole('textbox', { name: 'Email address' }).click();
@@ -40,7 +40,7 @@ export async function createFranchise(page: Page, loginFranchise = false){
         await page.waitForTimeout(CONFIG.TIMEOUTS.md);
         await login(page, CONFIG.ADMIN_EMAIL, CONFIG.ADMIN_PASSWORD);
         await page.waitForTimeout(CONFIG.TIMEOUTS.md);
-        await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`);
+        await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`, {waitUntil: "domcontentloaded"});
         await page.getByRole('button', { name: 'Add Franchise' }).click();
         await page.getByRole('textbox', { name: 'franchise name' }).fill(franchiseName);
         await page.getByRole('textbox', { name: 'franchisee admin email' }).fill(email);
@@ -53,7 +53,7 @@ export async function createFranchise(page: Page, loginFranchise = false){
 export async function closeFranchise(page: Page, franchiseName: string){
     await login(page, CONFIG.ADMIN_EMAIL, CONFIG.ADMIN_PASSWORD);
     await page.waitForTimeout(CONFIG.TIMEOUTS.md);
-    await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`)
+    await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`, {waitUntil: "domcontentloaded"});
     await page.getByTestId(`close-franchise-${franchiseName}`).click();
     await page.getByRole('button', { name: 'Close' }).click();
     await logout(page);
