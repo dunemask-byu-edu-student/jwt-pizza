@@ -90,6 +90,7 @@ jobs:
         run: |
             npx playwright install --with-deps chromium
             npm run test:coverage
+        working-directory: jwt-pizza
 
       - name: Stop Server
         if: always()
