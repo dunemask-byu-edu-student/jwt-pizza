@@ -1,5 +1,6 @@
 import { Page } from "@playwright/test";
 import { CONFIG } from "./views/test.config";
+import { expect } from "playwright-test-coverage";
 
 export const randomSlug = () => Math.random().toString(36).substring(2);
 
@@ -30,7 +31,8 @@ export async function login(page: Page, email: string, password: string, timeout
 }
 
 async function logout(page: Page) {
-    await page.getByRole('link', { name: 'Logout' }).click();
+  const logoutLink = page.getByRole('link', { name: 'Logout' });
+  if (await logoutLink.count() > 0) await logoutLink.click();
 }
 
 export async function createFranchise(page: Page, loginFranchise = false){
