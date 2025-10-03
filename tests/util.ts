@@ -31,8 +31,9 @@ export async function login(page: Page, email: string, password: string, timeout
 }
 
 async function logout(page: Page) {
-  const logoutLink = page.getByRole('link', { name: 'Logout' });
-  if (await logoutLink.count() > 0) await logoutLink.click();
+    await page.getByRole('link', { name: 'Logout' }).click();
+  // const logoutLink = page.getByRole('link', { name: 'Logout' });
+  // if (await logoutLink.count() > 0) await logoutLink.click();
 }
 
 export async function createFranchise(page: Page, loginFranchise = false){
