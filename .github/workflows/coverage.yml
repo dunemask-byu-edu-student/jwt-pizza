@@ -8,6 +8,8 @@ on:
 env:
     ADMIN_PASSWORD: potato
     CI_ADMIN_PASSWORD: potato
+    VITE_PIZZA_SERVICE_URL: http://localhost:3000
+    VITE_PIZZA_FACTORY_URL: https://pizza-factory.cs329.click
 jobs:
   build:
     name: Build
