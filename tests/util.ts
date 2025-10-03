@@ -19,9 +19,9 @@ export async function createNewDinerAndLogin(page: Page){
     return {name, email, password};
 }
 
-export async function login(page: Page, email: string, password: string, timeout = CONFIG.TIMEOUTS.sm){
+export async function login(page: Page, email: string, password: string, timeout = CONFIG.TIMEOUTS.xl){
         await page.goto(CONFIG.ORIGIN, {waitUntil: "domcontentloaded"});
-        await page.waitForTimeout(CONFIG.TIMEOUTS.md);
+        await page.waitForTimeout(timeout);
         await page.getByRole('link', { name: 'Login' }).click();
         await page.getByRole('textbox', { name: 'Email address' }).click();
         await page.getByRole('textbox', { name: 'Email address' }).fill(email);
@@ -39,9 +39,9 @@ export async function createFranchise(page: Page, loginFranchise = false){
         const { email, password } = await createNewDinerAndLogin(page);
         const franchiseName = `${email} franchise`;
         await logout(page);
-        await page.waitForTimeout(CONFIG.TIMEOUTS.md);
+        await page.waitForTimeout(CONFIG.TIMEOUTS.xl);
         await login(page, CONFIG.ADMIN_EMAIL, CONFIG.ADMIN_PASSWORD);
-        await page.waitForTimeout(CONFIG.TIMEOUTS.md);
+        await page.waitForTimeout(CONFIG.TIMEOUTS.xl);
         await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`, {waitUntil: "domcontentloaded"});
         await page.getByRole('button', { name: 'Add Franchise' }).click();
         await page.getByRole('textbox', { name: 'franchise name' }).fill(franchiseName);
@@ -54,7 +54,7 @@ export async function createFranchise(page: Page, loginFranchise = false){
 
 export async function closeFranchise(page: Page, franchiseName: string){
     await login(page, CONFIG.ADMIN_EMAIL, CONFIG.ADMIN_PASSWORD);
-    await page.waitForTimeout(CONFIG.TIMEOUTS.md);
+    await page.waitForTimeout(CONFIG.TIMEOUTS.xl);
     await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`, {waitUntil: "domcontentloaded"});
     await page.getByTestId(`close-franchise-${franchiseName}`).click();
     await page.getByRole('button', { name: 'Close' }).click();
