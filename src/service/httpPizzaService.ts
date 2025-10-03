@@ -9,32 +9,21 @@ class HttpPizzaService implements PizzaService {
       try {
         const options: any = {
           method: method,
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
         };
 
         const authToken = localStorage.getItem('token');
-        if (authToken) {
-          options.headers['Authorization'] = `Bearer ${authToken}`;
-        }
+        if (authToken) options.headers['Authorization'] = `Bearer ${authToken}`;
 
-        if (body) {
-          options.body = JSON.stringify(body);
-        }
+        if (body) options.body = JSON.stringify(body);
 
-        if (!path.startsWith('http')) {
-          path = pizzaServiceUrl + path;
-        }
+        if (!path.startsWith('http')) path = pizzaServiceUrl + path;
 
         const r = await fetch(path, options);
         const j = await r.json();
-        if (r.ok) {
-          resolve(j);
-        } else {
-          reject({ code: r.status, message: j.message });
-        }
+        if (r.ok) resolve(j);
+        else reject({ code: r.status, message: j.message });
       } catch (e: any) {
         reject({ code: 500, message: e.message });
       }
