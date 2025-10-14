@@ -23,6 +23,10 @@ test("user update self", async ({ page }) => {
 test("list and delete users", async ({ page }) => {
   const { name, email } = await createNewDinerAndLogin(page);
   await logout(page);
+  for (let i = 0; i < 10; i++) {
+    await createNewDinerAndLogin(page); // Create enough users to require pargination
+    await logout(page);
+  }
   await login(page, CONFIG.ADMIN_EMAIL, CONFIG.ADMIN_PASSWORD);
   await page.goto(`${CONFIG.ORIGIN}/admin-dashboard`, {
     waitUntil: "domcontentloaded",
