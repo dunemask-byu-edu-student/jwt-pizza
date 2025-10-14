@@ -6,7 +6,7 @@ export const randomSlug = () => Math.random().toString(36).substring(2);
 
 export async function createNewDinerAndLogin(page: Page) {
   const slug = randomSlug();
-  const name = `Full name '${slug}'`;
+  const name = `Full name '${slug}' ${Date.now()}`;
   const email = `pw-${slug}+${Date.now()}@test.com`;
   const password = slug;
   await page.goto(CONFIG.ORIGIN, { waitUntil: "domcontentloaded" });
