@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Github pages CI Pipeline
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
+    if: false
     name: Build
     runs-on: ubuntu-latest
     outputs:
@@ -36,6 +37,7 @@ jobs:
         with:
           path: dist/
   deploy:
+    if: false
     needs: build
     permissions:
       pages: write
