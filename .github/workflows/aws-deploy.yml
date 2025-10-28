@@ -26,6 +26,12 @@ jobs:
           version=$(date +'%Y%m%d.%H%M%S')
           echo "version=$version" >> "$GITHUB_OUTPUT"
           printf '{"version": "%s" }' "$version" > public/version.json
+      - name: Create .env.production file
+        run: |
+          cat <<EOF > .env.production
+          VITE_PIZZA_SERVICE_URL=https://api.pizza.dunemask.org
+          VITE_PIZZA_FACTORY_URL=https://pizza-factory.cs329.click
+          EOF
 
       - name: Build
         run: |
