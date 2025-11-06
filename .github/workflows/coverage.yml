@@ -70,9 +70,13 @@ jobs:
               url: 'https://pizza-factory.cs329.click',
               apiKey: '${{ secrets.FACTORY_API_KEY }}',
             },
-            adminPassword: '${{ env.CI_ADMIN_PASSWORD }}'
+            adminPassword: '${{ env.CI_ADMIN_PASSWORD }}',
+            metrics: {
+                apiKey: process.env.GRAFANA_METRICS_API_KEY,
+                source: process.env.GRAFANA_METRICS_SOURCE,
+                url: "https://otlp-gateway-prod-us-west-0.grafana.net/otlp/v1/metrics"
+            }
           };" > src/config.js
-          cat src/config.js
         working-directory: jwt-pizza-service
 
       - name: Init DB
